@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "",
+    "numeroSuministro": "",
+    "email": "",
+    "telefono": "",
+    "id": 1
+  },
+  {
+    "nombre": "Facundo Emmanuel FRANCOU",
+    "numeroSuministro": "00011",
+    "email": "francou.facundo@gmail.com",
+    "telefono": "+5493442467614",
+    "id": 2
+  }
+]
