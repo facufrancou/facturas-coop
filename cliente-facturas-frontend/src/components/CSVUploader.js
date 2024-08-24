@@ -36,7 +36,7 @@ function CSVUploader() {
         <div className="container mt-4">
             <div className="card">
                 <div className="card-body">
-                    <h4 className="card-title">Cargar CSV</h4>
+                    <h3 className="card-title">Cargar CSV</h3>
                     <div className="form-group">
                         <label htmlFor="csvFile">Selecciona un archivo CSV</label>
                         <input 

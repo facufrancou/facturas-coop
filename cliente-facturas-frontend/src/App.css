@@ -3,7 +3,7 @@
 /* Estilo general */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #000000;
   margin: 0;
   padding: 0;
   display: flex;
@@ -13,10 +13,10 @@ body {
 }
 
 .App {
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
   width: 100%;
   max-width: 500px;
 }

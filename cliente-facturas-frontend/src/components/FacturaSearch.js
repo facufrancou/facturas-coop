@@ -30,19 +30,18 @@ function FacturaSearch() {
                 cuit: cliente.cuit,  // Asegúrate de enviar los datos correctos
                 Nro: cliente.Nro     // El número de factura
             });
-            setMensajeWhatsApp('Mensaje enviado con éxito por WhatsApp.');
+            setMensajeWhatsApp('Mensaje enviado con éxito.');
         } catch (error) {
             console.error('Error al enviar mensaje por WhatsApp:', error);
             setMensajeWhatsApp('Error al enviar mensaje por WhatsApp.');
         }
     };
-    
 
     return (
         <div className="container mt-4">
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">Buscar Factura por Número de CUIT/CUIL</h5>
+                    <h4 className="card-title">Buscar Factura por Número de CUIT/CUIL</h4>
                     <div className="form-group">
                         <label htmlFor="cuit">CUIT/CUIL:</label>
                         <input 
@@ -54,22 +53,25 @@ function FacturaSearch() {
                             onChange={(e) => setCuit(e.target.value)} 
                         />
                     </div>
+                    <br/>
                     <button className="btn btn-primary mt-3" onClick={handleSearch}>
                         Buscar Cliente
                     </button>
                     {cliente && (
-                        <div className="mt-3">
-                            <h5>Cliente Encontrado:</h5>
+                        <div className="text-center mt-3">
+                            <h4 className="text-center">Cliente Encontrado:</h4>
                             <p><strong>Nombre:</strong> {cliente.nombre}</p>
                             <p><strong>CUIT/CUIL:</strong> {cliente.cuit}</p>
                             <p><strong>Número de Factura:</strong> {cliente.Nro}</p>
                             <p><strong>Periodo:</strong> {cliente.periodo}</p>
-                            <p><strong>Archivo PDF:</strong> {tienePDF ? 'Disponible' : 'No Disponible'}</p>
-                            {tienePDF && (
+                            <p><strong>Archivo PDF:</strong> {tienePDF ? 'Disponible' : 'No Disponible'}</p> 
+                            {tienePDF && (  
                                 <button className="btn btn-success mt-3" onClick={handleEnviarWhatsApp}>
                                     Enviar WhatsApp con Factura
-                                </button>
+                                </button>  
                             )}
+                            <br/>
+                            <br/>
                         </div>
                     )}
                     {mensajeWhatsApp && (
