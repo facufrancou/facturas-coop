@@ -1,16 +1,26 @@
 [
   {
-    "nombre": "",
-    "numeroSuministro": "",
-    "email": "",
-    "telefono": "",
-    "id": 1
-  },
-  {
     "nombre": "Facundo Emmanuel FRANCOU",
     "numeroSuministro": "00011",
     "email": "francou.facundo@gmail.com",
+    "cuit": "3245106",
     "telefono": "+5493442467614",
     "id": 2
+  },
+  {
+    "nombre": "METZ Mauricio C. Y Godoy Marisa",
+    "numeroSuministro": "06489",
+    "email": "francou.facundo@gmail.com",
+    "cuit": "23200007",
+    "telefono": "+5493442467614",
+    "id": 2
+  },
+  {
+    "nombre": "Facundo Emmanuel FRANCOU",
+    "numeroSuministro": "00008",
+    "email": "francou.facundo@gmail.com",
+    "cuit": "23244007",
+    "telefono": "03434272873",
+    "id": 3
   }
 ]

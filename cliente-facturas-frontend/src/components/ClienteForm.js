@@ -1,38 +1,3 @@
-/* 
-import React, { useState } from 'react';
-import axios from 'axios';
-
-function ClienteForm() {
-    const [cliente, setCliente] = useState({ nombre: '', numeroSuministro: '', email: '', telefono: '' });
-
-    const handleChange = (e) => {
-        setCliente({ ...cliente, [e.target.name]: e.target.value });
-    };
-
-    const  handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.post('http://localhost:5000/api/clientes', cliente);
-            alert('Cliente agregado');
-            setCliente({ nombre: '', numeroSuministro: '', email: '', telefono: '' });  // Limpiar el formulario
-        } catch (error) {
-            console.error('Error al agregar cliente:', error);
-        }
-    };
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <input name="nombre" placeholder="Nombre" value={cliente.nombre} onChange={handleChange} />
-            <input name="numeroSuministro" placeholder="Número de Suministro" value={cliente.numeroSuministro} onChange={handleChange} />
-            <input name="email" placeholder="Email" value={cliente.email} onChange={handleChange} />
-            <input name="telefono" placeholder="Teléfono" value={cliente.telefono} onChange={handleChange} />
-            <button type="submit">Agregar Cliente</button>
-        </form>
-    );
-}
-
-export default ClienteForm;
- */
 
 import React, { useState } from 'react';
 import axios from 'axios';

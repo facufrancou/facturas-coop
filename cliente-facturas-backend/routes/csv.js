@@ -9,25 +9,6 @@ const router = express.Router();
 // Configuración de multer para manejar la carga de archivos
 const upload = multer({ dest: 'csv/' });
 
-/* // Función para eliminar archivos JSON existentes en la carpeta 'data'
-function eliminarArchivosJSON() {
-    const jsonDir = path.join(__dirname, '../data');
-    
-    // Leer el contenido de la carpeta 'data'
-    fs.readdir(jsonDir, (err, files) => {
-        if (err) {
-            console.error('Error al leer la carpeta data:', err);
-            return;
-        }
-        
-        // Filtrar los archivos que tengan la extensión .json y eliminarlos
-        files.filter(file => file.endsWith('.json')).forEach(file => {
-            fs.unlinkSync(path.join(jsonDir, file));
-        });
-    });
-} */
-
-
 // Función para eliminar el archivo JSON que coincida con el nombre del nuevo archivo CSV
 function eliminarArchivosJSON(jsonFilePath) {
     if (fs.existsSync(jsonFilePath)) {
