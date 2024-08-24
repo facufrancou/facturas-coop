@@ -22,5 +22,19 @@
     "cuit": "23244007",
     "telefono": "03434272873",
     "id": 3
+  },
+  {
+    "nombre": "Facundo Emmanuel FRANCOU",
+    "numeroSuministro": "00008",
+    "email": "",
+    "telefono": "03442467614",
+    "id": 4
+  },
+  {
+    "nombre": "",
+    "numeroSuministro": "",
+    "email": "",
+    "telefono": "",
+    "id": 5
   }
 ]

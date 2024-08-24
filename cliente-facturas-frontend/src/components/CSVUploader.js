@@ -114,9 +114,11 @@ function CSVUploader() {
         <div className="container mt-4">
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">Cargar y Convertir CSV a JSON</h5>
+                    <h4 className="card-title">Cargar CSV de facturación actual</h4>
                     <div className="form-group">
-                        <label htmlFor="csvFile">Selecciona un archivo CSV</label>
+                      
+                        {/* <label htmlFor="csvFile">Selecciona un archivo CSV</label> */}
+                        
                         <input 
                             type="file" 
                             className="form-control-file" 
@@ -125,6 +127,7 @@ function CSVUploader() {
                             onChange={handleFileChange} 
                         />
                     </div>
+                    <br/>
                     <button className="btn btn-primary mt-3" onClick={handleUpload}>
                         Cargar y Convertir
                     </button>

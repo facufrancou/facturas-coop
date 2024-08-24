@@ -1,6 +1,7 @@
-
+// src/components/ClienteForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import InputField from './InputField';
 
 function ClienteForm() {
     const [cliente, setCliente] = useState({ nombre: '', numeroSuministro: '', email: '', telefono: '' });
@@ -26,54 +27,42 @@ function ClienteForm() {
                 <div className="card-body">
                     <h5 className="card-title">Agregar Cliente</h5>
                     <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="nombre">Nombre</label>
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                id="nombre" 
-                                name="nombre" 
-                                placeholder="Nombre"
-                                value={cliente.nombre} 
-                                onChange={handleChange} 
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="numeroSuministro">Número de Suministro</label>
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                id="numeroSuministro" 
-                                name="numeroSuministro" 
-                                placeholder="Número de Suministro"
-                                value={cliente.numeroSuministro} 
-                                onChange={handleChange} 
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input 
-                                type="email" 
-                                className="form-control" 
-                                id="email" 
-                                name="email" 
-                                placeholder="Email"
-                                value={cliente.email} 
-                                onChange={handleChange} 
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="telefono">Teléfono</label>
-                            <input 
-                                type="text" 
-                                className="form-control" 
-                                id="telefono" 
-                                name="telefono" 
-                                placeholder="Teléfono"
-                                value={cliente.telefono} 
-                                onChange={handleChange} 
-                            />
-                        </div>
+                        <InputField
+                            label="Nombre"
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            value={cliente.nombre}
+                            onChange={handleChange}
+                            placeholder="Nombre"
+                        />
+                        <InputField
+                            label="Número de Suministro"
+                            type="text"
+                            id="numeroSuministro"
+                            name="numeroSuministro"
+                            value={cliente.numeroSuministro}
+                            onChange={handleChange}
+                            placeholder="Número de Suministro"
+                        />
+                        <InputField
+                            label="Email"
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={cliente.email}
+                            onChange={handleChange}
+                            placeholder="Email"
+                        />
+                        <InputField
+                            label="Teléfono"
+                            type="text"
+                            id="telefono"
+                            name="telefono"
+                            value={cliente.telefono}
+                            onChange={handleChange}
+                            placeholder="Teléfono"
+                        />
                         <button type="submit" className="btn btn-primary mt-3">
                             Agregar Cliente
                         </button>

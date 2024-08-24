@@ -39,7 +39,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
         fs.unlinkSync(csvFilePath);
 
         res.json({
-            message: 'Archivo CSV cargado y convertido a JSON exitosamente',
+            message: 'Archivo CSV cargado exitosamente',
             jsonFilePath: jsonFilePath,
         });
     } catch (error) {
