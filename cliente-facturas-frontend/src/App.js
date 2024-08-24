@@ -10,7 +10,7 @@ function App() {
             <h1 className="text-center mb-4">Consulta y envíos de facturas</h1>
             {/* <ClienteForm /> */}
             <FacturaSearch />
-            {/* <CSVUploader /> */}
+            <CSVUploader />
         </div>
     );
 }

@@ -9,6 +9,7 @@ const pathClientes = './data/clientes.json';
 // Configuración de Twilio
 
 //Insertar configuracion de TXT
+
 const client = twilio(accountSid, authToken);
 const fromWhatsAppNumber = 'whatsapp:+14155238886'; // Número de WhatsApp de Twilio
 
@@ -28,13 +29,10 @@ function leerClientes() {
 // Ruta para enviar un mensaje de WhatsApp con el PDF de la factura
 router.post('/enviar', async (req, res) => {
     const {Nro, cuit}  = req.body;
-    console.log(cuit)
-    console.log(req.body)
 
     // Leer los clientes y buscar por CUIT
     const clientes = leerClientes();
     const cliente = clientes.find(c => c.cuit === cuit);
-    console.log(cliente)
 
     if (!cliente) {
         return res.status(404).json({ error: 'Cliente no encontrado' });
@@ -45,13 +43,11 @@ router.post('/enviar', async (req, res) => {
     const pdfFiles = fs.readdirSync(pdfDirectory);
     
     // Buscar un archivo PDF que coincida total o parcialmente con el número de factura
-    const pdfFile = pdfFiles.find(file => file.includes(Nro));
-    
+    const pdfFile = pdfFiles.find(file => file.includes(Nro)); 
 
     const tienePDF = !!pdfFile;
     const pdfFilePath = tienePDF ? path.join(`http://181.98.176.80:5000/pdfs/${pdfFile}`) : res.status(404).json({ error: 'Archivo PDF no encontrado' });
     
-
     try {
         
         // Enviar mensaje de WhatsApp con Twilio
