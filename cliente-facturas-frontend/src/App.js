@@ -7,7 +7,8 @@ import CSVUploader from "./components/CSVUploader";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import EnviarFacturas from './components/EnviarFacturas';
+import EnviarFacturas from "./components/EnviarFacturas";
+import Header from "./components/Header"; // Importa el componente Header
 
 import "./App.css";
 
@@ -15,6 +16,7 @@ function App() {
   return (
     <Router>
       <div className="App container mt-4">
+        <Header />
         <Routes>
           <Route
             path="/"
@@ -33,7 +35,7 @@ function App() {
           <Route path="/cargar-csv" element={<CSVUploader />} />
           <Route path="/enviar-facturas" element={<EnviarFacturas />} />
         </Routes>
-        <Nav className="justify-content-center" activeKey="">
+        <Nav fill variant="tabs" defaultActiveKey="/home">
           <Nav.Item>
             <Nav.Link href="agregar-cliente">Agregar Cliente</Nav.Link>
           </Nav.Item>

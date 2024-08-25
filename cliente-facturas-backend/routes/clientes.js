@@ -60,7 +60,7 @@ router.get('/disponibles', (req, res) => {
         // Verificar si el cliente tiene email
         if (cliente.Nro) return true;
     })
-    console.log(clientesConPdf)
+
     res.json(clientesDisponibles);
 });
 

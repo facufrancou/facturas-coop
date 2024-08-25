@@ -54,7 +54,7 @@ router.post('/enviar', async (req, res) => {
             to: `whatsapp:${cliente.telefono}`, // Número de WhatsApp del cliente
             mediaUrl: [pdfURL]  // URL del PDF
         });
-        console.log(message)    
+           
 
         res.json({ message: 'Mensaje enviado con éxito', sid: message.sid });
     } catch (error) {

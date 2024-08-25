@@ -65,7 +65,7 @@ router.post('/enviar', async (req, res) => {
         try {
             // Configurar los datos del correo
             const subject = 'Su Factura';
-            const text = `Hola ${cliente.nombre}, adjunto encontrarás la factura del período ${facturaCSV.periodo} correspondiente al suministro ${cliente.numeroSuminitro}` ;
+            const text = `Hola ${cliente.nombre}, adjunto encontrarás la factura del período ${facturaCSV.periodo} correspondiente al suministro ${cliente.numeroSuministro}` ;
             const attachments = [
                 {
                     filename: facturaPDF,
@@ -93,3 +93,5 @@ router.post('/enviar', async (req, res) => {
 });
 
 module.exports = router;
+ 
+

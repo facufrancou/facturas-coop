@@ -63,7 +63,7 @@ function ClienteForm() {
                             name="email"
                             value={cliente.email}
                             onChange={handleChange}
-                            placeholder="Email"
+                            placeholder="Email"                       
                         />
                         
                         <InputField
