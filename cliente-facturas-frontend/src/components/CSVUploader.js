@@ -4,7 +4,7 @@ import axios from 'axios';
 function CSVUploader() {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
-    const [emailsEnviados, setEmailsEnviados] = useState(false);
+    /* const [emailsEnviados, setEmailsEnviados] = useState(false); */
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -26,14 +26,14 @@ function CSVUploader() {
                 },
             });
             setMessage(response.data.message);
-            setEmailsEnviados(false);  // Resetear el estado de envío de emails
+            /* setEmailsEnviados(false);  // Resetear el estado de envío de emails */
         } catch (error) {
             console.error('Error al cargar el archivo:', error);
             setMessage('Ocurrió un error al cargar el archivo.');
         }
     };
 
-    const handleEnviarEmails = async () => {
+    /* const handleEnviarEmails = async () => {
         try {
             const response = await axios.post('http://localhost:5000/api/email/enviar');
             setEmailsEnviados(true);
@@ -42,7 +42,7 @@ function CSVUploader() {
             console.error('Error al enviar correos electrónicos:', error);
             setMessage('Error al enviar correos electrónicos.');
         }
-    };
+    }; */
 
     return (
         <div className="container mt-4">

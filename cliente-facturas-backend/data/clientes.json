@@ -2,7 +2,7 @@
   {
     "nombre": "Facundo Emmanuel FRANCOU",
     "numeroSuministro": "00011",
-    "email": "francou.facundo@gmail.com",
+    "email": "",
     "cuit": "3245106",
     "telefono": "+5493442467614",
     "id": 2
@@ -24,48 +24,11 @@
     "id": 3
   },
   {
-    "nombre": "Facundo Emmanuel FRANCOU",
-    "numeroSuministro": "00008",
+    "nombre": "Luciana Anchordoqui",
+    "numeroSuministro": "06869",
+    "cuit": "30678186445",
     "email": "",
-    "telefono": "03442467614",
-    "id": 4
-  },
-  {
-    "nombre": "",
-    "numeroSuministro": "",
-    "email": "",
-    "telefono": "",
-    "id": 5
-  },
-  {
-    "nombre": "Facundo Emmanuel FRANCOU",
-    "numeroSuministro": "00123",
-    "cuit": "20357000301",
-    "email": "francou.facundo@gmail.com",
-    "telefono": "03442467614",
-    "id": 6
-  },
-  {
-    "nombre": "",
-    "numeroSuministro": "",
-    "cuit": "",
-    "email": "",
-    "telefono": "",
-    "id": 7
-  },
-  {
-    "nombre": "",
-    "numeroSuministro": "",
-    "email": "",
-    "telefono": "",
-    "id": 8
-  },
-  {
-    "nombre": "",
-    "numeroSuministro": "",
-    "cuit": "",
-    "email": "",
-    "telefono": "",
-    "id": 9
+    "telefono": "34434472164",
+    "id": 10
   }
 ]

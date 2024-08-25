@@ -15,7 +15,7 @@ function ClienteForm() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/clientes', cliente);
-            setCliente({ nombre: '', numeroSuministro: '', email: '', telefono: '' });  // Limpiar el formulario
+            setCliente({ nombre: '', numeroSuministro: '',cuit: '', email: '', telefono: '' });  // Limpiar el formulario
             setMessage('Cliente cargado correctamente')
         } catch (error) {
             console.error('Error al agregar cliente:', error);
@@ -65,6 +65,7 @@ function ClienteForm() {
                             onChange={handleChange}
                             placeholder="Email"
                         />
+                        
                         <InputField
                             label="Teléfono"
                             type="text"

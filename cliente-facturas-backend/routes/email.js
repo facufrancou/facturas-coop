@@ -1,14 +1,11 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const sgMail = require('@sendgrid/mail');
+const sendEmail = require('../src/emailServece.js'); // Importar el servicio de email
 const router = express.Router();
 const pathClientes = './data/clientes.json';  // Archivo JSON de clientes
 const pathCSV = './data/facturas.json';     // Archivo JSON convertido desde CSV
 const logFilePath = './logs/clientes_no_enviados.log';
-
-// Configurar SendGrid con la API Key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY) // Reemplaza con tu API Key de SendGrid
 
 // Función para leer un archivo JSON
 function leerArchivoJSON(ruta) {
@@ -66,24 +63,19 @@ router.post('/enviar', async (req, res) => {
         }
 
         try {
-            // Configurar el correo electrónico
-            const msg = {
-                to: cliente.email,
-                from: 'tuemail@tudominio.com', // Reemplaza con tu dirección de correo electrónico
-                subject: 'Su Factura',
-                text: `Hola ${cliente.nombre}, adjunto encontrarás tu factura.`,
-                attachments: [
-                    {
-                        content: fs.readFileSync(path.join(facturasDir, facturaPDF)).toString('base64'),
-                        filename: facturaPDF,
-                        type: 'application/pdf',
-                        disposition: 'attachment'
-                    }
-                ]
-            };
+            // Configurar los datos del correo
+            const subject = 'Su Factura';
+            const text = `Hola ${cliente.nombre}, adjunto encontrarás la factura del período ${facturaCSV.periodo} correspondiente al suministro ${cliente.numeroSuminitro}` ;
+            const attachments = [
+                {
+                    filename: facturaPDF,
+                    path: path.join(facturasDir, facturaPDF),
+                    contentType: 'application/pdf'
+                }
+            ];
 
-            // 4. Enviar el correo electrónico
-            await sgMail.send(msg);
+            // Enviar el correo electrónico
+            await sendEmail(cliente.email, subject, text, attachments);
             emailsEnviados.push(cliente.email);
         } catch (error) {
             console.error(`Error al enviar correo electrónico a ${cliente.email}:`, error);

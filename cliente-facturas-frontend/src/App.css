@@ -77,6 +77,12 @@ button:hover {
   background-color: #218838;
 }
 
+/* src/App.css */
+
+.btn-primary:disabled {
+  background-color: #6b6969;
+  cursor: not-allowed;
+}
 /* Estilo del resultado de la búsqueda de facturas */
 .resultado-factura {
   margin-top: 20px;

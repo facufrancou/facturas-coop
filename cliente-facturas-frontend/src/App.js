@@ -7,6 +7,7 @@ import CSVUploader from "./components/CSVUploader";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import EnviarFacturas from './components/EnviarFacturas';
 
 import "./App.css";
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/agregar-cliente" element={<ClienteForm />} />
           <Route path="/buscar-factura" element={<FacturaSearch />} />
           <Route path="/cargar-csv" element={<CSVUploader />} />
+          <Route path="/enviar-facturas" element={<EnviarFacturas />} />
         </Routes>
         <Nav className="justify-content-center" activeKey="">
           <Nav.Item>
@@ -40,6 +42,9 @@ function App() {
           </Nav.Item>
           <Nav.Item>
             <Nav.Link href="cargar-csv">Cargar CSV</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="enviar-facturas">Enviar Facuturas</Nav.Link>
           </Nav.Item>
         </Nav>
       </div>

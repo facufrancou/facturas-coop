@@ -25,11 +25,10 @@ function leerClientes() {
     }
 }
 
-
 // Ruta para enviar un mensaje de WhatsApp con el PDF de la factura
 router.post('/enviar', async (req, res) => {
     const {Nro, cuit}  = req.body;
-
+   
 
     // Leer los clientes y buscar por CUIT
     const clientes = leerClientes();
@@ -45,10 +44,7 @@ router.post('/enviar', async (req, res) => {
     
     // Buscar un archivo PDF que coincida total o parcialmente con el número de factura
     const pdfFile = pdfFiles.find(file => file.includes(Nro)); 
-
-    //const pdfFilePath = tienePDF ? path.join(`http://181.98.176.80:5000/pdfs/${pdfFile}`) : res.status(404).json({ error: 'Archivo PDF no encontrado' });
     const pdfURL = `http://181.98.176.80:5000/pdfs/${pdfFile}`
-
     try {
         
         // Enviar mensaje de WhatsApp con Twilio
