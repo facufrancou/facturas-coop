@@ -4,7 +4,7 @@ const path = require('path');
 const sgMail = require('@sendgrid/mail');
 const router = express.Router();
 const pathClientes = './data/clientes.json';  // Archivo JSON de clientes
-const pathCSV = './data/test2.json';     // Archivo JSON convertido desde CSV
+const pathCSV = './data/facturas.json';     // Archivo JSON convertido desde CSV
 const logFilePath = './logs/clientes_no_enviados.log';
 
 // Configurar SendGrid con la API Key

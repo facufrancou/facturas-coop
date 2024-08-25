@@ -30,6 +30,7 @@ function leerClientes() {
 router.post('/enviar', async (req, res) => {
     const {Nro, cuit}  = req.body;
 
+
     // Leer los clientes y buscar por CUIT
     const clientes = leerClientes();
     const cliente = clientes.find(c => c.cuit === cuit);
@@ -45,9 +46,9 @@ router.post('/enviar', async (req, res) => {
     // Buscar un archivo PDF que coincida total o parcialmente con el número de factura
     const pdfFile = pdfFiles.find(file => file.includes(Nro)); 
 
-    const tienePDF = !!pdfFile;
-    const pdfFilePath = tienePDF ? path.join(`http://181.98.176.80:5000/pdfs/${pdfFile}`) : res.status(404).json({ error: 'Archivo PDF no encontrado' });
-    
+    //const pdfFilePath = tienePDF ? path.join(`http://181.98.176.80:5000/pdfs/${pdfFile}`) : res.status(404).json({ error: 'Archivo PDF no encontrado' });
+    const pdfURL = `http://181.98.176.80:5000/pdfs/${pdfFile}`
+
     try {
         
         // Enviar mensaje de WhatsApp con Twilio
@@ -55,7 +56,7 @@ router.post('/enviar', async (req, res) => {
             body: `Hola *${cliente.nombre}*, adjunto encontrarás la factura correspondiente al suministro: *${cliente.numeroSuministro}*.`,
             from: fromWhatsAppNumber,
             to: `whatsapp:${cliente.telefono}`, // Número de WhatsApp del cliente
-            mediaUrl: [`http://181.98.176.80:5000/pdfs/${pdfFile}`]  // URL del PDF
+            mediaUrl: [pdfURL]  // URL del PDF
         });
         console.log(message)    
 

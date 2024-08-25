@@ -36,5 +36,36 @@
     "email": "",
     "telefono": "",
     "id": 5
+  },
+  {
+    "nombre": "Facundo Emmanuel FRANCOU",
+    "numeroSuministro": "00123",
+    "cuit": "20357000301",
+    "email": "francou.facundo@gmail.com",
+    "telefono": "03442467614",
+    "id": 6
+  },
+  {
+    "nombre": "",
+    "numeroSuministro": "",
+    "cuit": "",
+    "email": "",
+    "telefono": "",
+    "id": 7
+  },
+  {
+    "nombre": "",
+    "numeroSuministro": "",
+    "email": "",
+    "telefono": "",
+    "id": 8
+  },
+  {
+    "nombre": "",
+    "numeroSuministro": "",
+    "cuit": "",
+    "email": "",
+    "telefono": "",
+    "id": 9
   }
 ]

@@ -1,25 +1,4 @@
-/* const express = require('express');
-const fs = require('fs');
-const router = express.Router();
-const path = './data/clientes.json';
 
-// Leer los clientes
-router.get('/', (req, res) => {
-    const clientes = JSON.parse(fs.readFileSync(path));
-    res.json(clientes);
-});
-
-// Agregar un cliente
-router.post('/', (req, res) => {
-    const clientes = JSON.parse(fs.readFileSync(path));
-    const nuevoCliente = req.body;
-    clientes.push(nuevoCliente);
-    fs.writeFileSync(path, JSON.stringify(clientes, null, 2));
-    res.status(201).json(nuevoCliente);
-});
-
-module.exports = router;
- */
 const express = require('express');
 const fs = require('fs');
 const router = express.Router();

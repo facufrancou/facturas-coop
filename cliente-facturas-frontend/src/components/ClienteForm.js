@@ -4,7 +4,8 @@ import axios from 'axios';
 import InputField from './InputField';
 
 function ClienteForm() {
-    const [cliente, setCliente] = useState({ nombre: '', numeroSuministro: '', email: '', telefono: '' });
+    const [cliente, setCliente] = useState({ nombre: '', numeroSuministro: '', cuit: '', email: '', telefono: '' });
+    const [message, setMessage] = useState('');
 
     const handleChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value });
@@ -14,10 +15,11 @@ function ClienteForm() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:5000/api/clientes', cliente);
-            alert('Cliente agregado');
             setCliente({ nombre: '', numeroSuministro: '', email: '', telefono: '' });  // Limpiar el formulario
+            setMessage('Cliente cargado correctamente')
         } catch (error) {
             console.error('Error al agregar cliente:', error);
+            setMessage('Ocurrió un error al cargar el cliente')
         }
     };
 
@@ -28,13 +30,13 @@ function ClienteForm() {
                     <h5 className="card-title">Agregar Cliente</h5>
                     <form onSubmit={handleSubmit}>
                         <InputField
-                            label="Nombre"
+                            label="Nombre completo"
                             type="text"
                             id="nombre"
                             name="nombre"
                             value={cliente.nombre}
                             onChange={handleChange}
-                            placeholder="Nombre"
+                            placeholder="Nombre completo"
                         />
                         <InputField
                             label="Número de Suministro"
@@ -44,6 +46,15 @@ function ClienteForm() {
                             value={cliente.numeroSuministro}
                             onChange={handleChange}
                             placeholder="Número de Suministro"
+                        />
+                        <InputField
+                            label="CUIT/CUIL/DNI"
+                            type="text"
+                            id="cuit"
+                            name="cuit"
+                            value={cliente.cuit}
+                            onChange={handleChange}
+                            placeholder="CUIT/CUIL/DNI"
                         />
                         <InputField
                             label="Email"
@@ -66,6 +77,7 @@ function ClienteForm() {
                         <button type="submit" className="btn btn-primary mt-3">
                             Agregar Cliente
                         </button>
+                        {message && <div className="alert alert-info mt-3">{message}</div>}
                     </form>
                 </div>
             </div>
