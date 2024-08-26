@@ -19,11 +19,11 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   width: 100%;
-  max-width: 500px;
+  max-width: 1000px;
 }
 
 .nav-link { 
-  
+  margin-top: 30px;
   color: #235523 !important;
   text-decoration: none;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
