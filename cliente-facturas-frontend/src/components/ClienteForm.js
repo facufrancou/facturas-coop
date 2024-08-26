@@ -1,4 +1,3 @@
-// src/components/ClienteForm.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import InputField from './InputField';
@@ -6,6 +5,7 @@ import InputField from './InputField';
 function ClienteForm() {
     const [cliente, setCliente] = useState({ nombre: '', numeroSuministro: '', cuit: '', email: '', telefono: '' });
     const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);  // Nuevo estado
 
     const handleChange = (e) => {
         setCliente({ ...cliente, [e.target.name]: e.target.value });
@@ -13,13 +13,16 @@ function ClienteForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);  // Mostrar indicador de carga
         try {
             await axios.post('http://localhost:5000/api/clientes', cliente);
             setCliente({ nombre: '', numeroSuministro: '',cuit: '', email: '', telefono: '' });  // Limpiar el formulario
-            setMessage('Cliente cargado correctamente')
+            setMessage('Cliente cargado correctamente');
         } catch (error) {
             console.error('Error al agregar cliente:', error);
-            setMessage('Ocurrió un error al cargar el cliente')
+            setMessage('Ocurrió un error al cargar el cliente');
+        } finally {
+            setLoading(false);  // Ocultar indicador de carga
         }
     };
 
@@ -37,6 +40,7 @@ function ClienteForm() {
                             value={cliente.nombre}
                             onChange={handleChange}
                             placeholder="Nombre completo"
+                            required={true}
                         />
                         <InputField
                             label="Número de Suministro"
@@ -46,6 +50,7 @@ function ClienteForm() {
                             value={cliente.numeroSuministro}
                             onChange={handleChange}
                             placeholder="Número de Suministro"
+                            required={true}
                         />
                         <InputField
                             label="CUIT/CUIL/DNI"
@@ -55,6 +60,7 @@ function ClienteForm() {
                             value={cliente.cuit}
                             onChange={handleChange}
                             placeholder="CUIT/CUIL/DNI"
+                            required={true}
                         />
                         <InputField
                             label="Email"
@@ -64,8 +70,8 @@ function ClienteForm() {
                             value={cliente.email}
                             onChange={handleChange}
                             placeholder="Email"                       
+                            required={true}
                         />
-                        
                         <InputField
                             label="Teléfono"
                             type="text"
@@ -74,9 +80,10 @@ function ClienteForm() {
                             value={cliente.telefono}
                             onChange={handleChange}
                             placeholder="Teléfono"
+                            required={true}
                         />
-                        <button type="submit" className="btn btn-primary mt-3">
-                            Agregar Cliente
+                        <button type="submit" className="btn btn-primary mt-3" disabled={loading}>
+                            {loading ? 'Agregando...' : 'Agregar Cliente'}
                         </button>
                         {message && <div className="alert alert-info mt-3">{message}</div>}
                     </form>

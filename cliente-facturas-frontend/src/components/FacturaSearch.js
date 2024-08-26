@@ -8,8 +8,10 @@ function FacturaSearch() {
     const [tienePDF, setTienePDF] = useState(false);
     const [error, setError] = useState(null);
     const [mensajeWhatsApp, setMensajeWhatsApp] = useState('');
+    const [loading, setLoading] = useState(false);  // Nuevo estado
 
     const handleSearch = async () => {
+        setLoading(true);  // Desactivar botón
         try {
             setError(null);
             const data = await buscarFacturaPorCuit(cuit);
@@ -21,6 +23,8 @@ function FacturaSearch() {
             setError('Cliente no encontrado o error al buscar.');
             setCliente(null);
             setTienePDF(false);
+        } finally {
+            setLoading(false);  // Reactivar botón
         }
     };
 
@@ -50,8 +54,8 @@ function FacturaSearch() {
                             onChange={(e) => setCuit(e.target.value)} 
                         />
                     </div>
-                    <button className="btn btn-primary mt-3" onClick={handleSearch}>
-                        Buscar Cliente
+                    <button className="btn btn-primary mt-3" onClick={handleSearch} disabled={loading}>
+                        {loading ? 'Buscando...' : 'Buscar Cliente'}
                     </button>
                     {cliente && (
                         <ClienteInfo 

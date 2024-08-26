@@ -1,4 +1,3 @@
-
 const express = require('express');
 const csv = require('csvtojson');
 const multer = require('multer');
@@ -7,7 +6,18 @@ const fs = require('fs');
 const router = express.Router();
 
 // Configuración de multer para manejar la carga de archivos
-const upload = multer({ dest: 'csv/' });
+const upload = multer({
+    dest: 'csv/',
+    fileFilter: (req, file, cb) => {
+        if (!file.originalname.match(/\.(CSV)$/)) {
+            return cb(new Error('Solo se permiten archivos CSV.'));
+        }
+        cb(null, true);
+    },
+    limits: {
+        fileSize: 5 * 1024 * 1024, // Limitar tamaño a 5MB
+    },
+});
 
 // Función para eliminar el archivo JSON que coincida con el nombre del nuevo archivo CSV
 function eliminarArchivosJSON(jsonFilePath) {
@@ -19,28 +29,22 @@ function eliminarArchivosJSON(jsonFilePath) {
 
 router.post('/upload', upload.single('file'), async (req, res) => {
     try {
-        const csvFilePath = path.join(__dirname, '../csv', req.file.filename);
+        const csvFilePath = path.join(__dirname, '../csv', path.basename(req.file.filename));
         const jsonFilePath = path.join(__dirname, '../data', `${req.file.originalname.split('.')[0]}.json`);
 
-        // Eliminar archivos JSON anteriores antes de guardar el nuevo
         eliminarArchivosJSON(jsonFilePath);
 
-        // Convertir el CSV a JSON
-        
-        // Configurar csvtojson para ignorar comillas no cerradas
         const jsonArray = await csv({
-            delimiter: ';',  // Especifica el delimitador que se está usando en tu CSV
+            delimiter: ';',
         }).fromFile(csvFilePath);
 
-        // Guardar el nuevo archivo JSON en la carpeta 'data'
         fs.writeFileSync(jsonFilePath, JSON.stringify(jsonArray, null, 2), 'utf-8');
 
-        // Eliminar el archivo CSV después de la conversión
         fs.unlinkSync(csvFilePath);
 
         res.json({
-            message: 'Archivo CSV cargado exitosamente',
-            jsonFilePath: jsonFilePath,
+            message: 'Archivo CSV cargado exitosamente, asegurate de copiar los archivos PDF correspondientes a las facturas.',
+            jsonFilePath,
         });
     } catch (error) {
         console.error('Error al procesar el archivo CSV:', error);

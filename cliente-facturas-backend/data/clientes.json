@@ -30,5 +30,13 @@
     "email": "",
     "telefono": "34434472164",
     "id": 10
+  },
+  {
+    "nombre": "",
+    "numeroSuministro": "",
+    "cuit": "",
+    "email": "",
+    "telefono": "",
+    "id": 11
   }
 ]

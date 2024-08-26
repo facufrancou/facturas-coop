@@ -4,10 +4,16 @@ import axios from 'axios';
 function CSVUploader() {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
-    /* const [emailsEnviados, setEmailsEnviados] = useState(false); */
+    const [loading, setLoading] = useState(false);  // Nuevo estado
 
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        if (selectedFile && selectedFile.name.endsWith('.CSV')) {
+            setFile(selectedFile);
+            setMessage('');
+        } else {
+            setMessage('Por favor, selecciona un archivo CSV válido.');
+        }
     };
 
     const handleUpload = async () => {
@@ -16,6 +22,7 @@ function CSVUploader() {
             return;
         }
 
+        setLoading(true);  // Mostrar indicador de carga
         const formData = new FormData();
         formData.append('file', file);
 
@@ -26,23 +33,13 @@ function CSVUploader() {
                 },
             });
             setMessage(response.data.message);
-            /* setEmailsEnviados(false);  // Resetear el estado de envío de emails */
         } catch (error) {
             console.error('Error al cargar el archivo:', error);
             setMessage('Ocurrió un error al cargar el archivo.');
+        } finally {
+            setLoading(false);  // Ocultar indicador de carga
         }
     };
-
-    /* const handleEnviarEmails = async () => {
-        try {
-            const response = await axios.post('http://localhost:5000/api/email/enviar');
-            setEmailsEnviados(true);
-            setMessage('Correos electrónicos enviados con éxito.');
-        } catch (error) {
-            console.error('Error al enviar correos electrónicos:', error);
-            setMessage('Error al enviar correos electrónicos.');
-        }
-    }; */
 
     return (
         <div className="container mt-4">
@@ -50,9 +47,6 @@ function CSVUploader() {
                 <div className="card-body">
                     <h4 className="card-title">Cargar CSV de facturación actual</h4>
                     <div className="form-group">
-                      
-                        {/* <label htmlFor="csvFile">Selecciona un archivo CSV</label> */}
-                        
                         <input 
                             type="file" 
                             className="form-control-file" 
@@ -62,15 +56,10 @@ function CSVUploader() {
                         />
                     </div>
                     <br/>
-                    <button className="btn btn-primary mt-3" onClick={handleUpload}>
-                        Cargar y Convertir
+                    <button className="btn btn-primary mt-3" onClick={handleUpload} disabled={loading}>
+                        {loading ? 'Cargando...' : 'Cargar y Convertir'}
                     </button>
                     {message && <div className="alert alert-info mt-3">{message}</div>}
-                        {/* {message && !emailsEnviados && (
-                            <button className="btn btn-success mt-3" onClick={handleEnviarEmails}>
-                                Enviar Todas las Facturas por Email
-                            </button>
-                        )} */}
                 </div>
             </div>
         </div>

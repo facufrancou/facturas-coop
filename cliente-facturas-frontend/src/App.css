@@ -3,7 +3,7 @@
 /* Estilo general */
 body {
   font-family: 'Lato', sans-serif;
-  background-color: #185227;
+  background-color: #0c4110;  /* Color de fondo claro para mejor accesibilidad */
   margin: 0;
   padding: 0;
   display: flex;
@@ -12,7 +12,6 @@ body {
   height: 100vh;
 }
 
-/* src/App.css */
 .App {
   background-color: #ffffff;
   padding: 20px;
@@ -30,7 +29,7 @@ body {
 }
 
 .nav-link:hover {
-  color: #00b33c !important
+  color: #00b33c !important;
 }
 
 h1 {
@@ -43,14 +42,7 @@ p {
   text-align: center;
   color: #555;
 }
-/* Estilo de los títulos */
-h1 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
 
-/* Estilo de los formularios */
 form {
   display: flex;
   flex-direction: column;
@@ -78,7 +70,6 @@ button {
 button:hover {
   background-color: #218838;
 }
-/* Header.css */
 
 .header {
   display: flex;
@@ -93,13 +84,11 @@ button:hover {
   height: auto;
 }
 
-/* src/App.css */
-
 .btn-primary:disabled {
   background-color: #6b6969;
   cursor: not-allowed;
 }
-/* Estilo del resultado de la búsqueda de facturas */
+
 .resultado-factura {
   margin-top: 20px;
   padding: 15px;
@@ -109,13 +98,11 @@ button:hover {
   font-size: 14px;
 }
 
-/* Estilo del input de búsqueda */
 .factura-search input {
   width: 100%;
   margin-bottom: 10px;
 }
 
-/* Estilo del resultado de los envíos de WhatsApp */
 .resultado-envio {
   margin-top: 20px;
   padding: 15px;
@@ -125,12 +112,11 @@ button:hover {
   font-size: 14px;
 }
 
-/* Estilo del mensaje de error */
 .resultado-factura p {
   color: red;
   font-weight: bold;
 }
-/* Estilo para el CSV Uploader */
+
 .csv-uploader {
   margin-top: 20px;
   padding: 20px;

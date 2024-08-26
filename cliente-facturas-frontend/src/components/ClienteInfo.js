@@ -1,6 +1,7 @@
 import React from 'react';
 
 function ClienteInfo({ cliente, tienePDF, handleEnviarWhatsApp }) {
+
     return (
         <div className="text-center mt-3">
             <h4 className="text-center">Información:</h4>

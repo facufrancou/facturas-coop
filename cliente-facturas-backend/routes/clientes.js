@@ -1,14 +1,10 @@
-
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const router = express.Router();
-const pathClientes = './data/clientes.json';  // Asegúrate de que este sea el archivo correcto
-const pdfDirectory = path.join(__dirname, '../public/pdfs');
-const pathCSV = './data/facturas.json';
+const pathClientes = './data/clientes.json';
 const clientesConFacturasPath = './data/facturas.json';
 
-// Función para leer los clientes desde el archivo JSON de Facturas
 function leerClientesConFactura() {
     try {
         const facturasData = fs.readFileSync(clientesConFacturasPath, 'utf8');
@@ -20,19 +16,16 @@ function leerClientesConFactura() {
     }
 }
 
-// Función para leer el archivo clientes.json
 function leerClientes() {
     try {
         const clientesData = fs.readFileSync(pathClientes, 'utf8');
         return JSON.parse(clientesData);
-        
     } catch (error) {
         console.error('Error al leer el archivo:', error);
         return [];
     }
 }
 
-// Función para escribir en el archivo clientes.json
 function escribirClientes(clientes) {
     try {
         fs.writeFileSync(pathClientes, JSON.stringify(clientes, null, 2), 'utf8');
@@ -41,41 +34,40 @@ function escribirClientes(clientes) {
     }
 }
 
-// Ruta para obtener clientes que tienen email y PDF disponible
+function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+function validarCUIT(cuit) {
+    // Implementa una validación de CUIT básica
+    return typeof cuit === 'string' && cuit.length === 1;
+}
+
 router.get('/disponibles', (req, res) => {
     const clientes = leerClientes();
     const clientesFactura = leerClientesConFactura();
 
-    
     const clientesDisponibles = clientes.filter(cliente => {
-        // Verificar si el cliente tiene email
-        if (cliente.email) return true;
-        // Obtener la lista de archivos PDF en la carpeta
-        
-       /*  // Verificar si hay un archivo PDF disponible para el cliente
-        const facturaPDF = fs.readdirSync(pdfDirectory).find(file => file.includes(cliente.Nro));
-        return facturaPDF ? true : false; */
+        return cliente.email && validarEmail(cliente.email);
     });
-    const clientesConPdf = clientes.filter(cliente => {
-        // Verificar si el cliente tiene email
-        if (cliente.Nro) return true;
-    })
 
     res.json(clientesDisponibles);
 });
 
-// Ruta para obtener todos los clientes
 router.get('/', (req, res) => {
     const clientes = leerClientes();
     res.json(clientes);
 });
 
-// Ruta para agregar un nuevo cliente
 router.post('/', (req, res) => {
     const clientes = leerClientes();
     const nuevoCliente = req.body;
 
-    // Asegúrate de que el nuevo cliente tenga un ID único
+    if (!validarCUIT(nuevoCliente.cuit) || !validarEmail(nuevoCliente.email)) {
+        return res.status(400).json({ error: 'Datos de cliente inválidos.' });
+    }
+
     nuevoCliente.id = clientes.length > 0 ? clientes[clientes.length - 1].id + 1 : 1;
 
     clientes.push(nuevoCliente);

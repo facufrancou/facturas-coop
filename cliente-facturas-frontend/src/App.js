@@ -1,4 +1,3 @@
-// src/App.js
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ClienteForm from "./components/ClienteForm";
@@ -8,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import EnviarFacturas from "./components/EnviarFacturas";
-import Header from "./components/Header"; // Importa el componente Header
+import Header from "./components/Header";
 
 import "./App.css";
 
@@ -23,7 +22,6 @@ function App() {
             element={
               <>
                 <h1 className="text-center">Gestión de Facturas</h1>
-                {/* <h4 className="text-center">Envío de Facturas</h4> */}
                 <p className="text-center">
                   Seleccione una opción del menú para comenzar.
                 </p>
@@ -37,16 +35,16 @@ function App() {
         </Routes>
         <Nav fill variant="tabs" defaultActiveKey="/home">
           <Nav.Item>
-            <Nav.Link href="agregar-cliente">Agregar Cliente</Nav.Link>
+            <Nav.Link as={Link} to="/agregar-cliente">Agregar Cliente</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="buscar-factura">Buscar</Nav.Link>
+            <Nav.Link as={Link} to="/buscar-factura">Buscar</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="cargar-csv">Cargar CSV</Nav.Link>
+            <Nav.Link as={Link} to="/cargar-csv">Cargar CSV</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="enviar-facturas">Enviar Facuturas</Nav.Link>
+            <Nav.Link as={Link} to="/enviar-facturas">Enviar Facturas</Nav.Link>
           </Nav.Item>
         </Nav>
       </div>

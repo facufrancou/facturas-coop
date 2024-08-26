@@ -1,7 +1,6 @@
-// src/components/InputField.js
 import React from 'react';
 
-function InputField({ label, type, id, name, value, onChange, placeholder }) {
+function InputField({ label, type, id, name, value, onChange, placeholder, required = false }) {
     return (
         <div className="form-group">
             <label htmlFor={id}>{label}</label>
@@ -13,6 +12,8 @@ function InputField({ label, type, id, name, value, onChange, placeholder }) {
                 value={value} 
                 onChange={onChange} 
                 placeholder={placeholder}
+                required={required}  // Validación
+                aria-label={label}  // Accesibilidad
             />
         </div>
     );
