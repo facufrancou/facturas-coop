@@ -30,7 +30,7 @@ function EnviarFacturas() {
         setMensaje('');
 
         try {
-            const response = await axios.post('https://181.98.176.80:5000/api/email/enviar');
+            const response = await axios.post('http://181.98.176.80:5000/api/email/enviar');
             setMensaje(`Se han enviado correos electrónicos a ${response.data.enviados} clientes.`);
         } catch (error) {
             console.error('Error al enviar correos electrónicos:', error);
