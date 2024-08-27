@@ -15,7 +15,7 @@ function ClienteForm() {
         e.preventDefault();
         setLoading(true);  // Mostrar indicador de carga
         try {
-            await axios.post('http://localhost:5000/api/clientes', cliente);
+            await axios.post('http://181.98.176.80:5000/api/clientes', cliente);
             setCliente({ nombre: '', numeroSuministro: '',cuit: '', email: '', telefono: '' });  // Limpiar el formulario
             setMessage('Cliente cargado correctamente');
         } catch (error) {
