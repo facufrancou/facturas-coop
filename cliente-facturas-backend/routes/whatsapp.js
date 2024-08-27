@@ -44,7 +44,7 @@ router.post('/enviar', async (req, res) => {
     
     // Buscar un archivo PDF que coincida total o parcialmente con el número de factura
     const pdfFile = pdfFiles.find(file => file.includes(Nro)); 
-    const pdfURL = `http://181.98.176.80:5000/pdfs/${pdfFile}`
+    const pdfURL = `https://181.98.176.80:5000/pdfs/${pdfFile}`
     try {
         
         // Enviar mensaje de WhatsApp con Twilio
@@ -59,7 +59,7 @@ router.post('/enviar', async (req, res) => {
         res.json({ message: 'Mensaje enviado con éxito', sid: message.sid });
     } catch (error) {
         console.error('Error al enviar mensaje por WhatsApp:', error);
-        res.status(500).json({ error: 'Error al enviar mensaje por WhatsApp.' });
+        res.status(500).json({ error: 'Error al enviar mensaje por WhatsApp' });
     }
 });
 
