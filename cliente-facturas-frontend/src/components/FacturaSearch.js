@@ -21,7 +21,7 @@ function FacturaSearch() {
             setTienePDF(data.tienePDF);
             setMensajeWhatsApp('');
         } catch (error) {
-            console.error('Error al buscar cliente por CUIT:', error);
+            console.error('Error al buscar cliente por CUIT: ', error);
             setError('Cliente no encontrado o error al buscar.');
             setCliente(null);
             setClienteData(null);

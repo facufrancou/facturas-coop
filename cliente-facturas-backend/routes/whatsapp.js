@@ -59,7 +59,7 @@ router.post('/enviar', async (req, res) => {
         res.json({ message: 'Mensaje enviado con éxito', sid: message.sid });
     } catch (error) {
         console.error('Error al enviar mensaje por WhatsApp:', error);
-        res.status(500).json({ error: 'Error al enviar mensaje por WhatsApp' });
+        res.status(500).json({ error: 'Error al enviar mensaje por WhatsApp.' });
     }
 });
 
