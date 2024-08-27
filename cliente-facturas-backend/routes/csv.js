@@ -9,7 +9,7 @@ const router = express.Router();
 const upload = multer({
     dest: 'csv/',
     fileFilter: (req, file, cb) => {
-        if (!file.originalname.match(/\.(CSV)$/)) {
+        if (!file.originalname.match(/\.(csv)$/)) {
             return cb(new Error('Solo se permiten archivos CSV.'));
         }
         cb(null, true);

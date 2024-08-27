@@ -8,7 +8,7 @@ function CSVUploader() {
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
-        if (selectedFile && selectedFile.name.endsWith('.CSV')) {
+        if (selectedFile && selectedFile.name.endsWith('.csv')) {
             setFile(selectedFile);
             setMessage('');
         } else {
