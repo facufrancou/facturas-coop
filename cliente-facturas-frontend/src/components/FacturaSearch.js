@@ -5,6 +5,7 @@ import ClienteInfo from './ClienteInfo';
 function FacturaSearch() {
     const [cuit, setCuit] = useState('');
     const [cliente, setCliente] = useState(null);
+    const [clienteData, setClienteData] = useState(null);
     const [tienePDF, setTienePDF] = useState(false);
     const [error, setError] = useState(null);
     const [mensajeWhatsApp, setMensajeWhatsApp] = useState('');
@@ -16,12 +17,14 @@ function FacturaSearch() {
             setError(null);
             const data = await buscarFacturaPorCuit(cuit);
             setCliente(data.cliente);
+            setClienteData(data.clienteData);
             setTienePDF(data.tienePDF);
             setMensajeWhatsApp('');
         } catch (error) {
             console.error('Error al buscar cliente por CUIT:', error);
             setError('Cliente no encontrado o error al buscar.');
             setCliente(null);
+            setClienteData(null);
             setTienePDF(false);
         } finally {
             setLoading(false);  // Reactivar botón
@@ -59,7 +62,8 @@ function FacturaSearch() {
                     </button>
                     {cliente && (
                         <ClienteInfo 
-                            cliente={cliente} 
+                            cliente={cliente}
+                            clienteData={clienteData}
                             tienePDF={tienePDF} 
                             handleEnviarWhatsApp={handleEnviarWhatsApp}
                         />

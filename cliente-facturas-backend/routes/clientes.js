@@ -63,10 +63,10 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const clientes = leerClientes();
     const nuevoCliente = req.body;
-
+/* 
     if (!validarCUIT(nuevoCliente.cuit) || !validarEmail(nuevoCliente.email)) {
         return res.status(400).json({ error: 'Datos de cliente inválidos.' });
-    }
+    } */
 
     nuevoCliente.id = clientes.length > 0 ? clientes[clientes.length - 1].id + 1 : 1;
 

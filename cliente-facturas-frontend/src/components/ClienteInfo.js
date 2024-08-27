@@ -1,12 +1,14 @@
 import React from 'react';
 
-function ClienteInfo({ cliente, tienePDF, handleEnviarWhatsApp }) {
+function ClienteInfo({ cliente, clienteData, tienePDF, handleEnviarWhatsApp }) {
 
     return (
         <div className="text-center mt-3">
             <h4 className="text-center">Información:</h4>
             <p><strong>Nombre:</strong> {cliente.nombre}</p>
-            <p><strong>CUIT/CUIL:</strong> {cliente.cuit}</p>
+            <p><strong>CUIT/CUIL/DNI:</strong> {cliente.cuit}</p>
+            <p><strong>Email:</strong> {clienteData.email}</p>
+            <p><strong>Telefono:</strong> {clienteData.telefono}</p>
             <p><strong>Número de Factura:</strong> {cliente.Nro}</p>
             <p><strong>Periodo:</strong> {cliente.periodo}</p>
             <p><strong>Archivo PDF:</strong> {tienePDF ? 'Disponible' : 'No Disponible'}</p>
