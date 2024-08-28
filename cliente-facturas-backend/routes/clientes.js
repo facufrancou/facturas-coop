@@ -76,4 +76,20 @@ router.post('/', (req, res) => {
     res.status(201).json(nuevoCliente);
 });
 
+router.put('/:cuit', (req, res) => {
+    const cuit = req.params.cuit;
+    let clientes = leerClientes();
+
+    const clienteIndex = clientes.findIndex(cliente => cliente.cuit === cuit);
+    if (clienteIndex === -1) {
+        return res.status(404).json({ error: 'Cliente no encontrado' });
+    }
+
+    // Actualizar el cliente
+    clientes[clienteIndex] = { ...clientes[clienteIndex], ...req.body };
+    escribirClientes(clientes);
+
+    res.status(200).json(clientes[clienteIndex]);
+});
+
 module.exports = router;

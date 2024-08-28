@@ -3,12 +3,10 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ClienteForm from "./components/ClienteForm";
 import FacturaSearch from "./components/FacturaSearch";
 import CSVUploader from "./components/CSVUploader";
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import EnviarFacturas from "./components/EnviarFacturas";
 import Header from "./components/Header";
-
+import EditarCliente from './components/EditarCliente';
 import "./App.css";
 
 function App() {
@@ -32,11 +30,13 @@ function App() {
           <Route path="/buscar-factura" element={<FacturaSearch />} />
           <Route path="/cargar-csv" element={<CSVUploader />} />
           <Route path="/enviar-facturas" element={<EnviarFacturas />} />
+          <Route path="/editar-cliente/:cuit" element={<EditarCliente />} />
         </Routes>
         <Nav fill variant="tabs" defaultActiveKey="/home">
           <Nav.Item>
             <Nav.Link as={Link} to="/agregar-cliente">Agregar Cliente</Nav.Link>
           </Nav.Item>
+          
           <Nav.Item>
             <Nav.Link as={Link} to="/buscar-factura">Buscar</Nav.Link>
           </Nav.Item>
@@ -46,6 +46,9 @@ function App() {
           <Nav.Item>
             <Nav.Link as={Link} to="/enviar-facturas">Enviar Facturas</Nav.Link>
           </Nav.Item>
+         {/*  <Nav.Item>
+            <Nav.Link as={Link} to="/editar-cliente/:cuit">Editar Cliente</Nav.Link>
+          </Nav.Item> */}
         </Nav>
       </div>
     </Router>

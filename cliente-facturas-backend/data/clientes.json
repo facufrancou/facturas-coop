@@ -28181,7 +28181,10 @@
     "domicilio": "(JG 1)BELGRANO 171",
     "telefono": "+5493442467614",
     "cuit": "23200007",
-    "email": "mauro_metz@live.com.ar"
+    "email": "mauro_metz@live.com.ar",
+    "fecha": "1/8/2024",
+    "periodo": "202405",
+    "Nro": "21FB00119282"
   },
   {
     "numeroSuministro": "06490",
@@ -30565,7 +30568,10 @@
     "domicilio": "(JG 1)PARAGUAY 927 - 10� PISO",
     "telefono": "0341-4207085",
     "cuit": "30678186445",
-    "email": "facturas_telecom@teco.com.ar"
+    "email": "facturas_telecom@teco.com.ar",
+    "fecha": "1/8/2024",
+    "periodo": "202405",
+    "Nro": "21FA00009864"
   },
   {
     "numeroSuministro": "06870",

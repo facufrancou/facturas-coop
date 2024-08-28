@@ -4,7 +4,6 @@
 body {
   font-family: 'Lato', sans-serif;
   background-color: #0c4110;  /* Color de fondo claro para mejor accesibilidad */
-  margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -13,6 +12,7 @@ body {
 }
 
 .App {
+
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
