@@ -22,6 +22,9 @@ function registrarClienteNoEnviado(cliente, motivo) {
     fs.appendFileSync(logFilePath, logMessage, 'utf8');
 }
 
+// Función para esperar un determinado tiempo (en milisegundos)
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 router.post('/enviar', async (req, res) => {
     const clientes = leerArchivoJSON(pathClientes);
     const facturasCSV = leerArchivoJSON(pathCSV);
@@ -30,7 +33,9 @@ router.post('/enviar', async (req, res) => {
     const emailsEnviados = [];
     const emailsNoEnviados = [];
 
-    for (const cliente of clientes) {
+    for (let i = 0; i < clientes.length; i++) {
+        const cliente = clientes[i];
+
         if (!cliente.email) {
             registrarClienteNoEnviado(cliente, 'Sin email registrado');
             emailsNoEnviados.push(cliente);
@@ -71,6 +76,13 @@ router.post('/enviar', async (req, res) => {
             console.error(`Error al enviar correo a ${cliente.email}:`, error);
             registrarClienteNoEnviado(cliente, 'Error al enviar email');
             emailsNoEnviados.push(cliente);
+        }
+
+        // Cada 10 correos enviados, espera 10 segundos
+        if ((i + 1) % 10 === 0) {
+            console.log('Esperando 10 segundos...');
+            await delay(5000); // tiempo en ms
+            
         }
     }
 
