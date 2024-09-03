@@ -28,7 +28,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 router.post('/enviar', async (req, res) => {
     const clientes = leerArchivoJSON(pathClientes);
     const facturasCSV = leerArchivoJSON(pathCSV);
-    const facturasDir = path.join(__dirname, '../public/pdfs');
+    const facturasDir = '\\\\192.168.1.103\\Archivos\\facturas';
 
     const emailsEnviados = [];
     const emailsNoEnviados = [];
@@ -50,7 +50,7 @@ router.post('/enviar', async (req, res) => {
             continue;
         }
 
-        const facturaPDF = fs.readdirSync(facturasDir).find(file => file.includes(facturaCSV.Nro));
+        const facturaPDF = fs.readdirSync('\\\\192.168.1.103\\Archivos\\facturas').find(file => file.includes(facturaCSV.Nro));
 
         if (!facturaPDF) {
             registrarClienteNoEnviado(cliente, 'Archivo PDF no encontrado');

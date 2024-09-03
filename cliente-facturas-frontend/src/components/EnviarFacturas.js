@@ -33,7 +33,7 @@ function EnviarFacturas() {
 
     try {
       const response = await axios.post(
-        "http://181.98.176.80:5000/api/email/enviar"
+        "http://localhost:5000/api/email/enviar"
       );
       setMensaje(
         `Se han enviado correos electrónicos a ${response.data.enviados} clientes.`

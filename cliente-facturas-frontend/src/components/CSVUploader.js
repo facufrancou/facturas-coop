@@ -27,7 +27,7 @@ function CSVUploader() {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('http://181.98.176.80:5000/api/csv/upload', formData, {
+            const response = await axios.post('http://localhost:5000/api/csv/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

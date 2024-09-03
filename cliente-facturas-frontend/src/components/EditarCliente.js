@@ -19,7 +19,7 @@ function EditarCliente() {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.put(`http://181.98.176.80:5000/api/clientes/${cliente.cuit}`, { ...cliente, ...clienteData });
+            await axios.put(`http://localhost:5000/api/clientes/${cliente.cuit}`, { ...cliente, ...clienteData });
             setMessage('Cliente actualizado correctamente');
             /* navigate('/'); */ // Redirige a la página principal o donde desees después de la actualización
         } catch (error) {
