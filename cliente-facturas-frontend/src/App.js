@@ -12,7 +12,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      <div className="App container mt-4">
+      <div className="App container mt-2">
         <Header />
         <Routes>
           <Route

@@ -33,12 +33,14 @@ router.get('/:cuit', (req, res) => {
     const cliente = clientesConFactura.find(c => c.cuit === cuit);
     const clienteData = clientesData.find(c => c.cuit === cuit);
     let tienePDF = false
-
+    
+    console.log(cliente)
+    console.log(clienteData)
     if (!clienteData) {
         return res.status(404).json({ error: 'Cliente no encontrado' });
     }
 
-    const pdfDirectory = path.join(__dirname, '../public/pdfs');
+    const pdfDirectory = '\\\\192.168.1.103\\Archivos\\facturas';
     const pdfFiles = fs.readdirSync(pdfDirectory);
     const pdfFile = pdfFiles.find(file => file.includes(cliente.Nro));
 
@@ -46,7 +48,7 @@ router.get('/:cuit', (req, res) => {
         tienePDF = true
     }
 
-    const pdfFilePath = path.join(`http://181.98.176.80:5000/pdfs/${pdfFile}`);
+    const pdfFilePath = `\\\\192.168.1.103\\Archivos\\facturas\\${pdfFile}`;
     res.json({
         cliente,
         clienteData,

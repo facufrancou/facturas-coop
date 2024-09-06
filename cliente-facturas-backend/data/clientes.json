@@ -1787,9 +1787,12 @@
     "numeroSuministro": "00296",
     "nombre": "EDUARDO Stertz E Hijos S.R.L.",
     "domicilio": "(JG 9)MARTIN PANUTTO 1167",
-    "telefono": "",
+    "telefono": "0",
     "cuit": "30690448692",
-    "email": "cgrinovero@stertz.com.ar"
+    "email": "cgrinovero@stertz.com.ar",
+    "fecha": "01/09/2024",
+    "periodo": "202408",
+    "Nro": "27FA00005472"
   },
   {
     "numeroSuministro": "00297",

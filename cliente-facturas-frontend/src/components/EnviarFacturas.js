@@ -10,7 +10,7 @@ function EnviarFacturas() {
     const fetchClientesDisponibles = async () => {
       try {
         const response = await axios.get(
-          "http://181.98.176.80:5000/api/clientes/disponibles"
+          "http://localhost:5000/api/clientes/disponibles"
         );
         setClientesDisponibles(response.data);
       } catch (error) {

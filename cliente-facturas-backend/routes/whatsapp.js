@@ -44,7 +44,7 @@ router.post('/enviar', async (req, res) => {
     
     // Buscar un archivo PDF que coincida total o parcialmente con el número de factura
     const pdfFile = pdfFiles.find(file => file.includes(Nro)); 
-    const pdfURL = `https://181.98.176.80:5000/pdfs/${pdfFile}`
+    const pdfURL = `\\\\192.168.1.103\\Archivos\\facturas\\${pdfFile}`
     try {
         
         // Enviar mensaje de WhatsApp con Twilio
