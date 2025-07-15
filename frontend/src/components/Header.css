@@ -1,0 +1,33 @@
+ .navbar-app {
+  width: 100vw;
+  background: linear-gradient(90deg, #0c4110 60%, #00b33c 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  min-height: 36px;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+ .navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+ .logo {
+  height: 24px;
+  margin-right: 8px;
+}
+ .navbar-title {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+}

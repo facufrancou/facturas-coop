@@ -1,0 +1,29 @@
+.card-cliente {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  margin: 24px auto;
+  max-width: 480px;
+  animation: fadeIn 0.7s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-cliente h4 {
+  margin-bottom: 18px;
+  color: #0c4110;
+  font-weight: 700;
+}
+.card-cliente p {
+  margin: 8px 0;
+  font-size: 1.1em;
+}
+.card-cliente .text-warning {
+  color: #d9534f;
+  font-weight: 600;
+}
+.card-cliente .btn {
+  margin: 10px 6px 0 6px;
+}
