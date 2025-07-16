@@ -1,19 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-<<<<<<< HEAD
 import { FaUserPlus, FaSearch, FaFileCsv, FaEnvelope, FaFileAlt } from "react-icons/fa";
-=======
-import { FaUserPlus, FaSearch, FaFileCsv, FaEnvelope } from "react-icons/fa";
->>>>>>> a32f0ce5092b8e47fbe3a65c2459ee19e2b83ba4
 import ClienteForm from "./components/ClienteForm";
 import FacturaSearch from "./components/FacturaSearch";
 import CSVUploader from "./components/CSVUploader";
 import EnviarFacturas from "./components/EnviarFacturas";
 import EditarCliente from './components/EditarCliente';
-<<<<<<< HEAD
 import InformeMails from './components/InformeMails';
-=======
->>>>>>> a32f0ce5092b8e47fbe3a65c2459ee19e2b83ba4
 import logo from './assets/logo1.png';
 
 function App() {
@@ -38,12 +31,9 @@ function App() {
             <li className="nav-item">
               <Link className="nav-link" style={{color:'#158a2c', fontWeight:600}} to="/enviar-facturas"><FaEnvelope style={{marginRight:'8px'}}/>Enviar Facturas</Link>
             </li>
-<<<<<<< HEAD
             <li className="nav-item">
               <Link className="nav-link" style={{color:'#158a2c', fontWeight:600}} to="/informes-mails"><FaFileAlt style={{marginRight:'8px'}}/>Informes de Mails</Link>
             </li>
-=======
->>>>>>> a32f0ce5092b8e47fbe3a65c2459ee19e2b83ba4
           </ul>
         </div>
       </nav>
@@ -55,10 +45,7 @@ function App() {
           <Route path="/cargar-csv" element={<CSVUploader />} />
           <Route path="/enviar-facturas" element={<EnviarFacturas />} />
           <Route path="/editar-cliente/:cuit" element={<EditarCliente />} />
-<<<<<<< HEAD
           <Route path="/informes-mails" element={<InformeMails />} />
-=======
->>>>>>> a32f0ce5092b8e47fbe3a65c2459ee19e2b83ba4
         </Routes>
       </div>
     </Router>

@@ -1,18 +1,20 @@
+
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const router = express.Router();
+const pathClientes = path.join(__dirname, '../data/clientes.json');
+const clientesConFacturasPath = path.join(__dirname, '../data/facturas.json');
+
 function leerFacturas() {
     try {
-        const facturasData = fs.readFileSync('./data/facturas.json', 'utf8');
+        const facturasData = fs.readFileSync(clientesConFacturasPath, 'utf8');
         return JSON.parse(facturasData);
     } catch (error) {
         console.error('Error al leer el archivo de facturas:', error);
         return [];
     }
 }
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const router = express.Router();
-const pathClientes = './data/clientes.json';
-const clientesConFacturasPath = './data/facturas.json';
 
 function leerClientesConFactura() {
     try {
@@ -27,8 +29,12 @@ function leerClientesConFactura() {
 
 function leerClientes() {
     try {
-        const clientesData = fs.readFileSync(pathClientes, 'utf8');
-        return JSON.parse(clientesData);
+        const absolutePath = path.resolve(pathClientes);
+        console.log('Leyendo clientes desde:', absolutePath);
+        const clientesData = fs.readFileSync(absolutePath, 'utf8');
+        const parsed = JSON.parse(clientesData);
+        console.log('Cantidad de clientes leídos:', Array.isArray(parsed) ? parsed.length : 'no es array');
+        return parsed;
     } catch (error) {
         console.error('Error al leer el archivo:', error);
         return [];

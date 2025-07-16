@@ -1,9 +1,10 @@
 const express = require('express');
 const fs = require('fs');
-const path = require('path');
+// ...existing code...
 const twilio = require('twilio');
 const router = express.Router();
-const pathClientes = './data/clientes.json';
+const path = require('path');
+const pathClientes = path.join(__dirname, '../data/clientes.json');
 
 
 // Configuración de Twilio

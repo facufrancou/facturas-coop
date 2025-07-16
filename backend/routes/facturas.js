@@ -1,10 +1,11 @@
 const express = require('express');
 const fs = require('fs');
 const router = express.Router();
+// ...existing code...
 const path = require('path');
-const clientesPath = './data/clientes.json';
-const facturasPath = './data/facturas.json';
-const clientesConFacturasPath = './data/facturas.json';
+const clientesPath = path.join(__dirname, '../data/clientes.json');
+const facturasPath = path.join(__dirname, '../data/facturas.json');
+const clientesConFacturasPath = path.join(__dirname, '../data/facturas.json');
 
 function leerClientesConFactura() {
     try {

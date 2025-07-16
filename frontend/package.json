@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
@@ -38,13 +40,7 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-<<<<<<< HEAD
     ]
   },
-  "proxy": "http://192.168.1.16:5000"
-=======
-    ],
-    "proxy": ""
-  }
->>>>>>> a32f0ce5092b8e47fbe3a65c2459ee19e2b83ba4
+  "proxy": ""
 }
