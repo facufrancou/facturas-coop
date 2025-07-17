@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://192.168.1.16:5000';
+
 export const enviarFacturaPorEmail = async (cliente) => {
-  const response = await axios.post('http://localhost:5000/api/email/enviar-individual', {
+  const response = await axios.post(`${BASE_URL}/api/email/enviar-individual`, {
     Codigo: cliente.Codigo,
     Email: cliente.Email,
     Nombre: cliente.Nombre,
@@ -11,13 +13,13 @@ export const enviarFacturaPorEmail = async (cliente) => {
 };
 
 export const buscarFacturaPorSuministro = async (suministro) => {
-  const response = await axios.get(`http://localhost:5000/api/facturas/${suministro}`);
+  const response = await axios.get(`${BASE_URL}/api/facturas/${suministro}`);
   console.log(response);
   return response.data;
 };
 
 export const enviarWhatsApp = async (cliente) => {
-    const response = await axios.post('http://localhost:5000/api/whatsapp/enviar', {
+    const response = await axios.post(`${BASE_URL}/api/whatsapp/enviar`, {
         cuit: cliente.cuit,
         Nro: cliente.Nro
     });

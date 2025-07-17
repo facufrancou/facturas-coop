@@ -18,7 +18,7 @@ function EditarCliente() {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.put(`http://localhost:5000/api/clientes/${cliente.Codigo}`, cliente);
+            await axios.put(`http://192.168.1.16:5000/api/clientes/${cliente.Codigo}`, cliente);
             setMessage('Cliente actualizado correctamente');
             // navigate('/');
         } catch (error) {

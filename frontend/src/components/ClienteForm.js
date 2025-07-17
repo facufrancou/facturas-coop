@@ -14,7 +14,7 @@ function ClienteForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/clientes', cliente);
+      await axios.post('http://192.168.1.16:5000/api/clientes', cliente);
       setCliente({ nombre: '', suministro: '', cuit: '', email: '', telefono: '' });
       setMessage('Cliente cargado correctamente');
     } catch (error) {
