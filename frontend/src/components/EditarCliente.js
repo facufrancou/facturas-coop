@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InputField from './InputField';
+import { BASE_URL } from '../services/facturaService';
 
 function EditarCliente() {
     const { state } = useLocation();
@@ -18,7 +19,7 @@ function EditarCliente() {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.put(`http://192.168.1.16:5000/api/clientes/${cliente.Codigo}`, cliente);
+            await axios.put(`${BASE_URL}/api/clientes/${cliente.Codigo}`, cliente);
             setMessage('Cliente actualizado correctamente');
             // navigate('/');
         } catch (error) {

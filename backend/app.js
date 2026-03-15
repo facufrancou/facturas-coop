@@ -7,12 +7,14 @@ const facturasRoutes = require('./routes/facturas');
 const whatsappRoutes = require('./routes/whatsapp');
 const csvRoutes = require('./routes/csv');
 const emailRoutes = require('./routes/email');
+const multipagoRoutes = require('./routes/multipago');
 
 const app = express();
 
 require('dotenv').config();
 
-app.use(express.json());  // Reemplazo de bodyParser
+app.use(express.json({ limit: '10mb' }));  // Reemplazo de bodyParser
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
 app.use(helmet());  // Nuevo
 
@@ -24,6 +26,7 @@ app.use('/api/facturas', facturasRoutes);
 app.use('/api/whatsapp', whatsappRoutes);
 app.use('/api/csv', csvRoutes);
 app.use('/api/email', emailRoutes);
+app.use('/api/multipago', multipagoRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT} (LAN)`));

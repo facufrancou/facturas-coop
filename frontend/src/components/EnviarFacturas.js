@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { BASE_URL } from '../services/facturaService';
 
 function EnviarFacturas() {
   const [totalClientes, setTotalClientes] = useState(0);
@@ -11,13 +12,14 @@ function EnviarFacturas() {
   const [enviando, setEnviando] = useState(false);
   const [resultado, setResultado] = useState("");
   const [enviados, setEnviados] = useState(0);
+  const [enviarLinkPago, setEnviarLinkPago] = useState(true);
 
   useEffect(() => {
-    axios.get("http://192.168.1.16:5000/api/clientes/").then(res => {
+    axios.get(`${BASE_URL}/api/clientes/`).then(res => {
       setTotalClientes(res.data.length);
       setClientesConMail(res.data.filter(c => c.Email && c.Email !== "").length);
     });
-    axios.get("http://192.168.1.16:5000/api/email/clientes-listos").then(res => {
+    axios.get(`${BASE_URL}/api/email/clientes-listos`).then(res => {
       // Si el backend responde { total, clientes }, usamos clientes.length
       const completos = res.data.clientes ? res.data.clientes.length : Array.isArray(res.data) ? res.data.length : 0;
       setClientesCompletos(completos);
@@ -32,7 +34,7 @@ function EnviarFacturas() {
     try {
       setResultado("Enviando...");
       // Animación visual durante el envío
-      const res = await axios.post("http://192.168.1.16:5000/api/email/enviar");
+      const res = await axios.post(`${BASE_URL}/api/email/enviar`, { enviarLinkPago });
       setResultado(res.data.mensaje || "Envío completado");
     } catch (e) {
       setResultado("Error en el envío");
@@ -57,6 +59,27 @@ function EnviarFacturas() {
               </div>
             </div>
           ))}
+        </div>
+        {/* Toggle link de pago */}
+        <div className="d-flex align-items-center justify-content-center gap-3 mb-4 p-3" style={{background:'#f7fafc', borderRadius:10, border:'1px solid #d4edda'}}>
+          <span style={{fontWeight:600, color:'#158a2c'}}>
+            <i className={`fas fa-${enviarLinkPago ? 'link' : 'unlink'} me-2`}></i>
+            Incluir link de pago Multipago
+          </span>
+          <div className="form-check form-switch mb-0">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="switchLinkPago"
+              checked={enviarLinkPago}
+              onChange={e => setEnviarLinkPago(e.target.checked)}
+              style={{width:'3em', height:'1.5em', cursor:'pointer'}}
+            />
+          </div>
+          <span style={{fontSize:'0.9em', color: enviarLinkPago ? '#158a2c' : '#999', fontWeight:500}}>
+            {enviarLinkPago ? 'Activado' : 'Desactivado'}
+          </span>
         </div>
         <div className="d-flex justify-content-center">
           <button className="btn btn-success px-4 py-2" style={{fontWeight:700, fontSize:'1.1em'}} onClick={handleEnviar} disabled={enviando}>

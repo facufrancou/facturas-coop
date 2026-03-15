@@ -6,6 +6,7 @@ function ClienteInfo({ cliente, clienteData, tienePDF, handleEnviarWhatsApp }) {
   const navigate = useNavigate();
   const [enviando, setEnviando] = useState(false);
   const [mensajeEnvio, setMensajeEnvio] = useState("");
+  const [enviarLinkPago, setEnviarLinkPago] = useState(true);
 
   const handleEditClick = () => {
     navigate(`/editar-cliente/${cliente.Codigo}`, { state: { cliente } });
@@ -15,7 +16,7 @@ function ClienteInfo({ cliente, clienteData, tienePDF, handleEnviarWhatsApp }) {
     setEnviando(true);
     setMensajeEnvio("");
     try {
-      const res = await enviarFacturaPorEmail(cliente);
+      const res = await enviarFacturaPorEmail(cliente, enviarLinkPago);
       setMensajeEnvio(res.message || "Factura enviada correctamente.");
     } catch (err) {
       setMensajeEnvio(err?.response?.data?.message || "Error al enviar la factura.");
@@ -80,6 +81,29 @@ function ClienteInfo({ cliente, clienteData, tienePDF, handleEnviarWhatsApp }) {
           </>
         )}
       </div>
+      {/* Toggle link de pago */}
+      {tienePDF && (
+        <div className="d-flex align-items-center justify-content-center gap-3 mb-3 p-2" style={{background:'#f7fafc', borderRadius:8, border:'1px solid #d4edda'}}>
+          <span style={{fontSize:'0.9em', fontWeight:600, color:'#158a2c'}}>
+            <i className={`fas fa-${enviarLinkPago ? 'link' : 'unlink'} me-1`}></i>
+            Link de pago Multipago
+          </span>
+          <div className="form-check form-switch mb-0">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="switchLinkPagoIndividual"
+              checked={enviarLinkPago}
+              onChange={e => setEnviarLinkPago(e.target.checked)}
+              style={{width:'2.8em', height:'1.4em', cursor:'pointer'}}
+            />
+          </div>
+          <span style={{fontSize:'0.85em', color: enviarLinkPago ? '#158a2c' : '#999', fontWeight:500}}>
+            {enviarLinkPago ? 'Activado' : 'Desactivado'}
+          </span>
+        </div>
+      )}
       {mensajeEnvio && (
         <div className={`alert mt-3 text-center ${mensajeEnvio.includes('correctamente') ? 'alert-success' : 'alert-danger'}`}>{mensajeEnvio}</div>
       )}

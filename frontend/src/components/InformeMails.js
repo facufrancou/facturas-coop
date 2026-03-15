@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./InformeMails.module.css";
+import { BASE_URL } from '../services/facturaService';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -11,7 +12,7 @@ function InformeMails() {
 
   useEffect(() => {
     // Obtener lista de informes disponibles
-    axios.get("http://192.168.1.16:5000/api/email/listar-informes")
+    axios.get(`${BASE_URL}/api/email/listar-informes`)
       .then(res => setInformes(res.data))
       .catch(() => setInformes([]));
   }, []);
@@ -19,7 +20,7 @@ function InformeMails() {
   const descargarInforme = (year, month, comoPDF = false) => {
     setDescargando(true);
     axios({
-      url: `http://192.168.1.16:5000/api/email/descargar-informe/${year}/${month}`,
+      url: `${BASE_URL}/api/email/descargar-informe/${year}/${month}`,
       method: 'GET',
       responseType: 'blob',
     }).then((response) => {

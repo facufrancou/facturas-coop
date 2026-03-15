@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { FaUserPlus, FaSearch, FaFileCsv, FaEnvelope, FaFileAlt } from "react-icons/fa";
 import ClienteForm from "./components/ClienteForm";
 import FacturaSearch from "./components/FacturaSearch";
-import CSVUploader from "./components/CSVUploader";
+import CargaDatos from "./components/CargaDatos";
 import EnviarFacturas from "./components/EnviarFacturas";
 import EditarCliente from './components/EditarCliente';
 import InformeMails from './components/InformeMails';
@@ -26,7 +26,7 @@ function App() {
               <Link className="nav-link" style={{color:'#158a2c', fontWeight:600}} to="/buscar-factura"><FaSearch style={{marginRight:'8px'}}/>Buscar Factura</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" style={{color:'#158a2c', fontWeight:600}} to="/cargar-csv"><FaFileCsv style={{marginRight:'8px'}}/>Cargar CSV</Link>
+              <Link className="nav-link" style={{color:'#158a2c', fontWeight:600}} to="/cargar-datos"><FaFileCsv style={{marginRight:'8px'}}/>Carga de Datos</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" style={{color:'#158a2c', fontWeight:600}} to="/enviar-facturas"><FaEnvelope style={{marginRight:'8px'}}/>Enviar Facturas</Link>
@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<><h1 className="text-center" style={{color:'#158a2c', fontWeight:800, marginTop:'32px'}}>Gestión de Facturas</h1><p className="text-center" style={{fontSize:'1.2em'}}>Seleccione una opción del menú para comenzar.</p></>} />
           <Route path="/agregar-cliente" element={<ClienteForm />} />
           <Route path="/buscar-factura" element={<FacturaSearch />} />
-          <Route path="/cargar-csv" element={<CSVUploader />} />
+          <Route path="/cargar-datos" element={<CargaDatos />} />
           <Route path="/enviar-facturas" element={<EnviarFacturas />} />
           <Route path="/editar-cliente/:cuit" element={<EditarCliente />} />
           <Route path="/informes-mails" element={<InformeMails />} />

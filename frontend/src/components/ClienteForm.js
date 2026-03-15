@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../services/facturaService';
 
 function ClienteForm() {
   const [cliente, setCliente] = useState({ nombre: '', suministro: '', cuit: '', email: '', telefono: '' });
@@ -14,7 +15,7 @@ function ClienteForm() {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('http://192.168.1.16:5000/api/clientes', cliente);
+      await axios.post(`${BASE_URL}/api/clientes`, cliente);
       setCliente({ nombre: '', suministro: '', cuit: '', email: '', telefono: '' });
       setMessage('Cliente cargado correctamente');
     } catch (error) {

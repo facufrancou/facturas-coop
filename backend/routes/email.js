@@ -112,7 +112,8 @@ router.get("/clientes-listos", (req, res) => {
 // Endpoint para enviar la factura de un solo cliente
 
 router.post("/enviar-individual", async (req, res) => {
-  const { Codigo, Email, Nombre, cuit } = req.body;
+  const { Codigo, Email, Nombre, cuit, enviarLinkPago } = req.body;
+  const incluirLink = enviarLinkPago !== false && enviarLinkPago !== 'false';
   const facturasCSV = leerArchivoJSON(pathCSV);
 
   if (!Email) {
@@ -156,7 +157,33 @@ router.post("/enviar-individual", async (req, res) => {
 
   try {
     const subject = "Su Factura - Coop. Gral José de San Martín";
-    const text = `Hola ${Nombre}, adjunto encontrarás la factura ${facturaCSV.factura} del período ${facturaCSV.periodo} correspondiente al suministro ${Codigo}.`;
+    // Buscar código de barras en multipago por suministro
+    let codigoBarra = null;
+    try {
+      const multipagoPath = path.join(__dirname, '../data/facturas_multipago.txt');
+      if (fs.existsSync(multipagoPath)) {
+        const multipagoLines = fs.readFileSync(multipagoPath, 'utf8').split('\n');
+        const suministroCliente = parseInt(Codigo);
+        console.log(`[MULTIPAGO] Buscando suministro: ${suministroCliente}, total líneas: ${multipagoLines.length}`);
+        const multipagoLine = multipagoLines.find(l => l.trim().length > 0 && parseInt(l.slice(9, 16)) === suministroCliente);
+        if (multipagoLine) {
+          codigoBarra = multipagoLine.slice(16).trim();
+          console.log(`[MULTIPAGO] Encontrado! Código: ${codigoBarra.substring(0, 20)}...`);
+        } else {
+          console.log(`[MULTIPAGO] No encontrado para suministro ${suministroCliente}`);
+          // Debug: mostrar algunos suministros disponibles
+          const muestra = multipagoLines.slice(0, 3).map(l => l.trim().length > 0 ? parseInt(l.slice(9, 16)) : null).filter(Boolean);
+          console.log(`[MULTIPAGO] Primeros suministros en archivo:`, muestra);
+        }
+      } else {
+        console.log('[MULTIPAGO] Archivo no encontrado:', multipagoPath);
+      }
+    } catch (e) { console.error('[MULTIPAGO] Error:', e.message); codigoBarra = null; }
+    const emailLink = Email.replace('@', '%20');
+    const linkPago = (incluirLink && codigoBarra) ? `https://pum.multipago.com.ar/index.php/codigo_barra/${codigoBarra}/${emailLink}` : null;
+    console.log(`[EMAIL-IND] enviarLinkPago=${enviarLinkPago} incluirLink=${incluirLink} linkPago=${linkPago ? 'SI' : 'NO'}`);
+    const text = `Hola ${Nombre}, adjunto encontrarás la factura ${facturaCSV.factura} del período ${facturaCSV.periodo} correspondiente al suministro ${Codigo}.${linkPago ? '\n\nAhora también podés pagar directamente tu factura: ' + linkPago : ''}`;
+    const html = `<p>Hola ${Nombre}, adjunto encontrarás la factura <b>${facturaCSV.factura}</b> del período <b>${facturaCSV.periodo}</b> correspondiente al suministro <b>${Codigo}</b>.</p>${linkPago ? `<p>Ahora también podés pagar directamente tu factura haciendo click acá: <a href="${linkPago}">Pago Online</a></p>` : ''}`;
     const attachments = [
       {
         filename: facturaPDF,
@@ -164,7 +191,7 @@ router.post("/enviar-individual", async (req, res) => {
         contentType: "application/pdf",
       },
     ];
-    await sendEmail(Email, subject, text, attachments);
+    await sendEmail(Email, subject, text, attachments, html);
     registrarMailEnviado({ Nombre, cuit, Codigo }, facturaCSV, Email);
     console.log(`Correo enviado a ${Email}`);
     return res.json({ message: "Factura enviada correctamente." });
@@ -178,14 +205,34 @@ router.post("/enviar-individual", async (req, res) => {
   }
 });
 router.post("/enviar", async (req, res) => {
+  const { enviarLinkPago } = req.body;
+  const incluirLink = enviarLinkPago !== false && enviarLinkPago !== 'false';
   const clientesListos = obtenerClientesListos();
   const emailsEnviados = [];
   const emailsNoEnviados = [];
+
+  // Leer multipago una sola vez antes del loop
+  let multipagoLines = [];
+  try {
+    const multipagoPath = path.join(__dirname, '../data/facturas_multipago.txt');
+    if (fs.existsSync(multipagoPath)) {
+      multipagoLines = fs.readFileSync(multipagoPath, 'utf8').split('\n');
+    }
+  } catch (e) { multipagoLines = []; }
+
   for (let i = 0; i < clientesListos.length; i++) {
     const cliente = clientesListos[i];
     try {
       const subject = "Su Factura - Coop. Gral José de San Martín";
-      const text = `Hola ${cliente.Nombre}, adjunto encontrarás la factura ${cliente.factura.factura} del período ${cliente.factura.periodo} correspondiente al suministro ${cliente.Codigo}.`;
+      // Buscar código de barras por suministro (chars 9-15 del campo de 16)
+      const suministroCliente = parseInt(cliente.Codigo);
+      const multipagoLine = multipagoLines.find(l => l.trim().length > 0 && parseInt(l.slice(9, 16)) === suministroCliente);
+      const codigoBarra = multipagoLine ? multipagoLine.slice(16).trim() : null;
+      if (!codigoBarra) console.log(`[MULTIPAGO] Sin código de barra para suministro ${suministroCliente}`);
+      const emailLink = cliente.Email.replace('@', '%20');
+      const linkPago = (incluirLink && codigoBarra) ? `https://pum.multipago.com.ar/index.php/codigo_barra/${codigoBarra}/${emailLink}` : null;
+      const text = `Hola ${cliente.Nombre}, adjunto encontrarás la factura ${cliente.factura.factura} del período ${cliente.factura.periodo} correspondiente al suministro ${cliente.Codigo}.${linkPago ? '\n\nAhora también podés pagar directamente tu factura: ' + linkPago : ''}`;
+      const html = `<p>Hola ${cliente.Nombre}, adjunto encontrarás la factura <b>${cliente.factura.factura}</b> del período <b>${cliente.factura.periodo}</b> correspondiente al suministro <b>${cliente.Codigo}</b>.</p>${linkPago ? `<p>Ahora también podés pagar directamente tu factura haciendo click acá: <a href="${linkPago}">Pago Online</a></p>` : ''}`;
       const attachments = [
         {
           filename: cliente.facturaPDF,
@@ -193,7 +240,7 @@ router.post("/enviar", async (req, res) => {
           contentType: "application/pdf",
         },
       ];
-      await sendEmail(cliente.Email, subject, text, attachments);
+      await sendEmail(cliente.Email, subject, text, attachments, html);
       registrarMailEnviado(cliente, cliente.factura, cliente.Email);
       console.log(`Correo enviado a ${cliente.Email}`);
       emailsEnviados.push(cliente.Email);

@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_API_URL || 'http://192.168.1.16:5000';
+export const BASE_URL = process.env.REACT_APP_API_URL || 'http://192.168.1.16:5000';
 
-export const enviarFacturaPorEmail = async (cliente) => {
+export const enviarFacturaPorEmail = async (cliente, enviarLinkPago = true) => {
   const response = await axios.post(`${BASE_URL}/api/email/enviar-individual`, {
     Codigo: cliente.Codigo,
     Email: cliente.Email,
     Nombre: cliente.Nombre,
-    cuit: cliente.cuit
+    cuit: cliente.cuit,
+    enviarLinkPago
   });
   return response.data;
 };

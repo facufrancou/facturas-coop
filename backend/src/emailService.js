@@ -11,12 +11,14 @@ const transporter = nodemailer.createTransport({
 });
 
 // Función para enviar correos
-const sendEmail = async (to, subject, text, attachments = []) => {
+// html es opcional: si se pasa, se envía como HTML (con fallback en text)
+const sendEmail = async (to, subject, text, attachments = [], html = null) => {
     const mailOptions = {
         from: process.env.GMAIL_USER,
         to: to,
         subject: subject,
         text: text,
+        ...(html && { html }),
         attachments: attachments,
     };
 
