@@ -156,7 +156,7 @@ router.post("/enviar-individual", async (req, res) => {
   }
 
   try {
-    const subject = "Su Factura - Coop. Gral José de San Martín";
+    const subject = `Su Factura ${facturaCSV.factura} - Suministro ${Codigo} - Período ${facturaCSV.periodo} - Coop. Gral José de San Martín`;
     // Buscar código de barras en multipago por suministro
     let codigoBarra = null;
     try {
@@ -223,7 +223,7 @@ router.post("/enviar", async (req, res) => {
   for (let i = 0; i < clientesListos.length; i++) {
     const cliente = clientesListos[i];
     try {
-      const subject = "Su Factura - Coop. Gral José de San Martín";
+      const subject = `Su Factura ${cliente.factura.factura} - Suministro ${cliente.Codigo} - Período ${cliente.factura.periodo} - Coop. Gral José de San Martín`;
       // Buscar código de barras por suministro (chars 9-15 del campo de 16)
       const suministroCliente = parseInt(cliente.Codigo);
       const multipagoLine = multipagoLines.find(l => l.trim().length > 0 && parseInt(l.slice(9, 16)) === suministroCliente);
